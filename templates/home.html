@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero-section">
+
+    <div class="overlay"></div>
+
+    <div class="container position-relative">
+
+        <div class="row align-items-center min-vh-100">
+
+            <!-- LEFT CONTENT -->
+
+            <div class="col-lg-6 text-white">
+
+                <span class="badge bg-success px-3 py-2 mb-3">
+                    Smart Finance Management
+                </span>
+
+                <h1 class="display-2 fw-bold mb-4">
+
+                    Smart Expense
+                    <span class="text-info">
+                        Tracker
+                    </span>
+
+                </h1>
+
+                <p class="lead text-light mb-4">
+
+                    Track expenses, manage budgets,
+                    monitor savings and analyze
+                    spending smartly with beautiful
+                    financial insights.
+
+                </p>
+
+                <div class="d-flex gap-3 mb-5">
+
+                    <a href="{% url 'login' %}"
+                       class="btn btn-lg btn-success px-5 py-3 rounded-pill shadow">
+
+                        Login
+
+                    </a>
+
+                    <a href="{% url 'register' %}"
+                       class="btn btn-lg btn-outline-light px-5 py-3 rounded-pill">
+
+                        Register
+
+                    </a>
+
+                </div>
+
+                <!-- FEATURES -->
+
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card">
+
+                            <h5>Track Expenses</h5>
+
+                            <p>
+                                Record and monitor
+                                every expense easily.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card">
+
+                            <h5>Set Budgets</h5>
+
+                            <p>
+                                Stay under your monthly
+                                spending limits.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="feature-card">
+
+                            <h5>Analyze</h5>
+
+                            <p>
+                                Beautiful charts and
+                                spending analytics.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="col-lg-6 text-center">
+
+                <div class="dashboard-preview">
+
+                    <div class="preview-card income">
+
+                        <h6>Total Income</h6>
+
+                        <h2>₹28,500</h2>
+
+                    </div>
+
+                    <div class="preview-card expense">
+
+                        <h6>Total Expenses</h6>
+
+                        <h2>₹12,450</h2>
+
+                    </div>
+
+                    <div class="preview-card savings">
+
+                        <h6>Savings</h6>
+
+                        <h2>₹15,900</h2>
+
+                    </div>
+
+                    <div class="preview-card chart">
+
+                        <h4 class="mb-3">
+                            Expense Analytics
+                        </h4>
+
+                        <div class="bars">
+
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+    body {
+
+        background:
+        linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #1e293b
+        );
+
+        overflow-x: hidden;
+    }
+
+    .hero-section {
+
+        position: relative;
+
+        min-height: 100vh;
+
+        background:
+        radial-gradient(circle at top left,
+        rgba(59,130,246,0.3),
+        transparent 30%),
+
+        radial-gradient(circle at bottom right,
+        rgba(168,85,247,0.3),
+        transparent 30%);
+    }
+
+    .overlay {
+
+        position: absolute;
+
+        width: 100%;
+        height: 100%;
+
+        background:
+        rgba(0,0,0,0.2);
+
+        z-index: 1;
+    }
+
+    .container {
+
+        z-index: 2;
+    }
+
+    .feature-card {
+
+        background:
+        rgba(255,255,255,0.08);
+
+        border-radius: 20px;
+
+        padding: 20px;
+
+        backdrop-filter: blur(10px);
+
+        height: 100%;
+
+        transition: 0.3s;
+
+        box-shadow:
+        0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .feature-card:hover {
+
+        transform: translateY(-8px);
+    }
+
+    .feature-card h5 {
+
+        color: #38bdf8;
+    }
+
+    .feature-card p {
+
+        color: #cbd5e1;
+        font-size: 14px;
+    }
+
+    .dashboard-preview {
+
+        background:
+        rgba(255,255,255,0.08);
+
+        padding: 30px;
+
+        border-radius: 30px;
+
+        backdrop-filter: blur(12px);
+
+        box-shadow:
+        0 15px 35px rgba(0,0,0,0.4);
+    }
+
+    .preview-card {
+
+        border-radius: 20px;
+
+        padding: 25px;
+
+        margin-bottom: 20px;
+
+        color: white;
+
+        text-align: left;
+
+        box-shadow:
+        0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .income {
+
+        background:
+        linear-gradient(
+        135deg,
+        #10b981,
+        #34d399
+        );
+    }
+
+    .expense {
+
+        background:
+        linear-gradient(
+        135deg,
+        #ef4444,
+        #f97316
+        );
+    }
+
+    .savings {
+
+        background:
+        linear-gradient(
+        135deg,
+        #3b82f6,
+        #8b5cf6
+        );
+    }
+
+    .chart {
+
+        background:
+        rgba(15,23,42,0.8);
+    }
+
+    .bars {
+
+        display: flex;
+
+        align-items: flex-end;
+
+        gap: 15px;
+
+        height: 180px;
+
+        margin-top: 30px;
+    }
+
+    .bar {
+
+        flex: 1;
+
+        border-radius: 15px 15px 0 0;
+
+        background:
+        linear-gradient(
+        180deg,
+        #22d3ee,
+        #3b82f6
+        );
+
+        animation: grow 2s infinite alternate;
+    }
+
+    .bar:nth-child(1) {
+
+        height: 60%;
+    }
+
+    .bar:nth-child(2) {
+
+        height: 85%;
+    }
+
+    .bar:nth-child(3) {
+
+        height: 45%;
+    }
+
+    .bar:nth-child(4) {
+
+        height: 95%;
+    }
+
+    .bar:nth-child(5) {
+
+        height: 70%;
+    }
+
+    @keyframes grow {
+
+        from {
+
+            opacity: 0.6;
+        }
+
+        to {
+
+            opacity: 1;
+        }
+    }
+
+</style>
+
+{% endblock %}

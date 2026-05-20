@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background: linear-gradient(to right, #020024, #090979, #000000);
+        min-height: 100vh;
+    }
+
+    .income-container {
+        width: 90%;
+        max-width: 1400px;
+        margin: 40px auto;
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .left-section {
+        flex: 1;
+        min-width: 350px;
+        color: white;
+    }
+
+    .left-section h1 {
+        font-size: 80px;
+        font-weight: bold;
+        line-height: 1.1;
+        margin-bottom: 25px;
+    }
+
+    .left-section p {
+        font-size: 24px;
+        color: #d1d5db;
+        margin-bottom: 35px;
+    }
+
+    .feature-boxes {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .feature-card {
+        width: 180px;
+        background: rgba(255,255,255,0.08);
+        padding: 25px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+        transition: 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .feature-card h4 {
+        color: #38bdf8;
+        margin-bottom: 10px;
+    }
+
+    .feature-card p {
+        font-size: 15px;
+        color: #d1d5db;
+        margin: 0;
+    }
+
+    .income-form-card {
+        flex: 1;
+        min-width: 420px;
+        background: rgba(255,255,255,0.1);
+        padding: 50px;
+        border-radius: 30px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0px 0px 25px rgba(0,0,0,0.4);
+    }
+
+    .income-form-card h2 {
+        color: white;
+        text-align: center;
+        font-size: 60px;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+
+    .form-label {
+        color: white;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .custom-input,
+    textarea {
+        width: 100%;
+        padding: 16px;
+        border-radius: 12px;
+        border: 2px solid transparent;
+        font-size: 18px;
+        margin-bottom: 25px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .custom-input:focus,
+    textarea:focus {
+        border-color: #38bdf8;
+        box-shadow: 0px 0px 12px rgba(56,189,248,0.6);
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: 18px;
+        border: none;
+        border-radius: 14px;
+        background: linear-gradient(to right, #22c55e, #16a34a);
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .save-btn:hover {
+        transform: scale(1.02);
+    }
+
+    @media(max-width: 1000px) {
+        .income-container {
+            flex-direction: column;
+        }
+
+        .left-section h1 {
+            font-size: 55px;
+        }
+    }
+</style>
+
+<div class="income-container">
+
+    <div class="left-section">
+
+        <span style="
+            background:#06b6d4;
+            color:white;
+            padding:10px 20px;
+            border-radius:30px;
+            font-weight:bold;
+        ">
+            Income Tracking
+        </span>
+
+        <h1>
+            Add Your <br>
+            Income <br>
+            Smartly
+        </h1>
+
+        <p>
+            Manage salary, business profits, freelancing income and
+            other earnings beautifully with smart financial tracking.
+        </p>
+
+        <div class="feature-boxes">
+
+            <div class="feature-card">
+                <h4>Track Earnings</h4>
+                <p>Monitor all your income sources.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Financial Growth</h4>
+                <p>Analyze your monthly growth.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Smart Reports</h4>
+                <p>Generate income insights easily.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="income-form-card">
+
+        <h2>Add Income</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label class="form-label">
+                Income Source
+            </label>
+
+            <input
+                type="text"
+                name="source"
+                class="custom-input"
+                placeholder="Enter Income Source"
+                required
+            >
+
+            <label class="form-label">
+                Amount
+            </label>
+
+            <input
+                type="number"
+                name="amount"
+                class="custom-input"
+                placeholder="Enter Amount"
+                required
+            >
+
+            <label class="form-label">
+                Description
+            </label>
+
+            <textarea
+                name="description"
+                rows="4"
+                placeholder="Enter Description"
+            ></textarea>
+
+            <button type="submit" class="save-btn">
+                Save Income
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

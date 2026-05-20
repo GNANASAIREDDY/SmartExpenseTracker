@@ -1,0 +1,419 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="expense-bg">
+
+    <div class="container py-5">
+
+        <div class="row align-items-center">
+
+            <!-- LEFT SIDE -->
+
+            <div class="col-lg-5 mb-4">
+
+                <div class="left-content">
+
+                    <span class="badge-text">
+                        Smart Expense Management
+                    </span>
+
+                    <h1 class="main-heading">
+                        Add Your <br>
+                        Daily Expenses
+                    </h1>
+
+                    <p class="description-text">
+
+                        Keep track of your spending habits,
+                        manage your money smartly and monitor
+                        your financial growth beautifully.
+
+                    </p>
+
+                    <div class="feature-boxes">
+
+                        <div class="feature-card">
+
+                            <h4>Track Spending</h4>
+
+                            <p>
+                                Monitor where your money goes.
+                            </p>
+
+                        </div>
+
+                        <div class="feature-card">
+
+                            <h4>Smart Analytics</h4>
+
+                            <p>
+                                Visualize expenses with charts.
+                            </p>
+
+                        </div>
+
+                        <div class="feature-card">
+
+                            <h4>Budget Planning</h4>
+
+                            <p>
+                                Stay under monthly budgets.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="col-lg-7">
+
+                <div class="expense-card">
+
+                    <h1 class="expense-title">
+
+                        Add Expense
+
+                    </h1>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <!-- AMOUNT -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label custom-label">
+
+                                Amount
+
+                            </label>
+
+                            {{ form.amount }}
+
+                        </div>
+
+                        <!-- CATEGORY -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label custom-label">
+
+                                Category
+
+                            </label>
+
+                            {{ form.category }}
+
+                        </div>
+
+                        <!-- PAYMENT -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label custom-label">
+
+                                Payment Method
+
+                            </label>
+
+                            {{ form.payment_method }}
+
+                        </div>
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label custom-label">
+
+                                Description
+
+                            </label>
+
+                            {{ form.description }}
+
+                        </div>
+
+                        <button type="submit" class="save-btn">
+
+                            Save Expense
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+    body {
+
+        background:
+        linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #111827
+        );
+
+        min-height: 100vh;
+    }
+
+    .expense-bg {
+
+        min-height: 100vh;
+    }
+
+    .left-content {
+
+        padding-right: 30px;
+    }
+
+    .badge-text {
+
+        background:
+        linear-gradient(
+        135deg,
+        #10b981,
+        #06b6d4
+        );
+
+        color: white;
+
+        padding: 8px 18px;
+
+        border-radius: 30px;
+
+        font-size: 14px;
+
+        font-weight: 600;
+    }
+
+    .main-heading {
+
+        font-size: 65px;
+
+        font-weight: 800;
+
+        color: white;
+
+        margin-top: 25px;
+
+        line-height: 1.1;
+    }
+
+    .description-text {
+
+        color: #cbd5e1;
+
+        font-size: 20px;
+
+        margin-top: 25px;
+
+        line-height: 1.8;
+    }
+
+    .feature-boxes {
+
+        display: flex;
+
+        gap: 20px;
+
+        margin-top: 40px;
+
+        flex-wrap: wrap;
+    }
+
+    .feature-card {
+
+        background:
+        rgba(255,255,255,0.08);
+
+        padding: 20px;
+
+        border-radius: 20px;
+
+        width: 180px;
+
+        backdrop-filter: blur(10px);
+
+        border: 1px solid rgba(255,255,255,0.1);
+
+        transition: 0.3s;
+    }
+
+    .feature-card:hover {
+
+        transform: translateY(-5px);
+
+        box-shadow:
+        0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    .feature-card h4 {
+
+        color: #38bdf8;
+
+        font-size: 22px;
+
+        margin-bottom: 10px;
+    }
+
+    .feature-card p {
+
+        color: #cbd5e1;
+
+        font-size: 15px;
+    }
+
+    .expense-card {
+
+        background:
+        rgba(255,255,255,0.08);
+
+        padding: 50px;
+
+        border-radius: 30px;
+
+        backdrop-filter: blur(12px);
+
+        border: 1px solid rgba(255,255,255,0.1);
+
+        box-shadow:
+        0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .expense-title {
+
+        text-align: center;
+
+        color: white;
+
+        font-size: 50px;
+
+        font-weight: 700;
+
+        margin-bottom: 40px;
+    }
+
+    .custom-label {
+
+        color: #f8fafc;
+
+        font-size: 18px;
+
+        margin-bottom: 10px;
+    }
+
+    input,
+    select,
+    textarea {
+
+        width: 100%;
+
+        padding: 15px 20px;
+
+        border-radius: 15px;
+
+        border: none;
+
+        background:
+        rgba(255,255,255,0.08);
+
+        color: white;
+
+        font-size: 17px;
+
+        outline: none;
+
+        transition: 0.3s;
+    }
+
+    textarea {
+
+        min-height: 150px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+
+        border: 2px solid #38bdf8;
+
+        box-shadow:
+        0 0 15px rgba(56,189,248,0.4);
+    }
+
+    option {
+
+        color: black;
+    }
+
+    .save-btn {
+
+        width: 100%;
+
+        border: none;
+
+        padding: 16px;
+
+        border-radius: 15px;
+
+        background:
+        linear-gradient(
+        135deg,
+        #06b6d4,
+        #2563eb
+        );
+
+        color: white;
+
+        font-size: 20px;
+
+        font-weight: 600;
+
+        margin-top: 15px;
+
+        transition: 0.3s;
+    }
+
+    .save-btn:hover {
+
+        transform: scale(1.02);
+
+        box-shadow:
+        0 10px 20px rgba(37,99,235,0.5);
+    }
+
+    @media(max-width:991px) {
+
+        .main-heading {
+
+            font-size: 45px;
+        }
+
+        .expense-card {
+
+            padding: 35px;
+        }
+
+    }
+
+</style>
+
+{% endblock %}

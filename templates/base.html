@@ -1,0 +1,174 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Expense Tracker</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        body{
+            margin:0;
+            padding:0;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        .navbar-custom{
+            background:#111827;
+            padding:18px 40px;
+            box-shadow:0px 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .navbar-brand{
+            color:white !important;
+            font-size:38px;
+            font-weight:bold;
+            text-decoration:none;
+        }
+
+        .nav-link-custom{
+            color:white !important;
+            margin-left:12px;
+            padding:10px 18px !important;
+            border-radius:12px;
+            border:1px solid rgba(255,255,255,0.2);
+            transition:0.3s;
+            text-decoration:none;
+            font-size:17px;
+        }
+
+        .nav-link-custom:hover{
+            transform:translateY(-2px);
+            background:rgba(255,255,255,0.08);
+        }
+
+        .dashboard-btn{
+            border:1px solid #06b6d4;
+            color:#06b6d4 !important;
+        }
+
+        .expense-btn{
+            border:1px solid white;
+        }
+
+        .income-btn{
+            border:1px solid #22c55e;
+            color:#22c55e !important;
+        }
+
+        .budget-btn{
+            border:1px solid #facc15;
+            color:#facc15 !important;
+        }
+
+        .profile-btn{
+            border:1px solid #facc15;
+            color:#facc15 !important;
+        }
+
+        .logout-btn{
+            background:#ef4444;
+            border:none;
+        }
+
+        .logout-btn:hover{
+            background:#dc2626;
+        }
+
+        .username-text{
+            color:white;
+            font-size:18px;
+            margin-right:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="{% url 'dashboard' %}">
+            Expense Tracker
+        </a>
+
+        <div class="d-flex align-items-center ms-auto">
+
+            {% if user.is_authenticated %}
+
+                <span class="username-text">
+                    Hello, {{ user.username }}
+                </span>
+
+                <a href="{% url 'dashboard' %}"
+                   class="nav-link-custom dashboard-btn">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'expense_list' %}"
+                   class="nav-link-custom expense-btn">
+                    Expenses
+                </a>
+
+                <a href="{% url 'income_list' %}"
+                   class="nav-link-custom income-btn">
+                    Income
+                </a>
+
+                <a href="{% url 'budget_list' %}"
+                   class="nav-link-custom budget-btn">
+                    Budgets
+                </a>
+
+                <a href="{% url 'profile' %}"
+                   class="nav-link-custom profile-btn">
+                    Profile
+                </a>
+
+                <a href="{% url 'logout' %}"
+                   class="nav-link-custom logout-btn">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="nav-link-custom dashboard-btn">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}"
+                   class="nav-link-custom income-btn">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</nav>
+
+{% block content %}
+{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,462 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+
+body{
+    background: linear-gradient(to bottom right, #0f172a, #111827);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    color: #f8fafc;
+}
+
+/* DASHBOARD CONTAINER */
+
+.dashboard-container{
+    padding: 30px;
+}
+
+/* TITLE */
+
+.dashboard-title{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-title h1{
+    font-size: 52px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.dashboard-title p{
+    color: #94a3b8;
+    font-size: 16px;
+}
+
+/* STATS */
+
+.stats-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 14px;
+    margin-bottom: 25px;
+}
+
+.stat-card{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    background: #1e293b;
+    padding: 22px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 100px;
+
+    border: 1px solid rgba(255,255,255,0.05);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.stat-card h4,
+.stat-card h2{
+    text-decoration: none;
+    color: white;
+    margin: 0;
+}
+
+.stat-card h4{
+    font-size: 15px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+.stat-card h2{
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.stat-card:hover{
+    transform: translateY(-4px);
+}
+
+.stat-card h5{
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #f8fafc;
+}
+
+.stat-card h2{
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+/* PREMIUM CARD COLORS */
+
+.expense-card{
+    background: linear-gradient(135deg,#334155,#1e293b);
+    border-left: 4px solid #ef4444;
+}
+
+.income-card{
+    background: linear-gradient(135deg,#134e4a,#1e293b);
+    border-left: 4px solid #10b981;
+}
+
+.savings-card{
+    background: linear-gradient(135deg,#1e3a8a,#1e293b);
+    border-left: 4px solid #3b82f6;
+}
+
+.transaction-card{
+    background: linear-gradient(135deg,#4c1d95,#1e293b);
+    border-left: 4px solid #8b5cf6;
+}
+
+.average-card{
+    background: linear-gradient(135deg,#78350f,#1e293b);
+    border-left: 4px solid #f59e0b;
+}
+
+.category-card{
+    background: linear-gradient(135deg,#164e63,#1e293b);
+    border-left: 4px solid #06b6d4;
+}
+
+/* CHARTS */
+
+.charts-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+    align-items: start;
+}
+
+.chart-box{
+    background: #1e293b;
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+
+    height: 300px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+}
+
+.chart-box h3{
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #f8fafc;
+}
+
+.chart-box canvas{
+    width: 100% !important;
+    height: 220px !important;
+}
+
+/* RECENT TABLE */
+
+.recent-box{
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.recent-box h3{
+    margin-bottom: 15px;
+    color: #f8fafc;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+table thead{
+    background:#0f172a;
+}
+
+table th{
+    padding: 14px;
+    text-align: left;
+    color:#ffffff;
+    font-size:14px;
+}
+
+table td{
+    padding: 14px;
+    color:#cbd5e1;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+table tr:hover{
+    background: rgba(255,255,255,0.03);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+    .charts-section{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-title h1{
+        font-size:40px;
+    }
+
+}
+
+</style>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-title">
+        <h1>Financial Dashboard</h1>
+        <p>Monitor your expenses, income and savings smartly</p>
+    </div>
+
+    <!-- STAT CARDS -->
+
+    <div class="stats-container">
+
+    <a href="{% url 'expense_list' %}" class="stat-card expense-card">
+        <h4>Total Expenses</h4>
+        <h2>₹{{ total_expenses }}</h2>
+    </a>
+
+    <a href="{% url 'income_list' %}" class="stat-card income-card">
+        <h4>Total Income</h4>
+        <h2>₹{{ total_income }}</h2>
+    </a>
+
+    <a href="{% url 'budget_list' %}" class="stat-card savings-card">
+        <h4>Savings</h4>
+        <h2>₹{{ savings }}</h2>
+    </a>
+
+    <a href="{% url 'expense_list' %}" class="stat-card transaction-card">
+        <h4>Transactions</h4>
+        <h2>{{ transaction_count }}</h2>
+    </a>
+
+    <a href="{% url 'expense_list' %}" class="stat-card average-card">
+        <h4>Average Expense</h4>
+        <h2>₹{{ average_expense|floatformat:0 }}</h2>
+    </a>
+
+    <a href="{% url 'expense_list' %}" class="stat-card category-card">
+        <h4>Top Category</h4>
+        <h2>{{ highest_category }}</h2>
+    </a>
+
+</div>
+
+    <!-- CHARTS -->
+
+    <div class="charts-section">
+
+        <div class="chart-box">
+            <h3>Expense Categories</h3>
+            <canvas id="expensePieChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <h3>Expense Analytics</h3>
+            <canvas id="expenseBarChart"></canvas>
+        </div>
+
+    </div>
+
+    <!-- RECENT EXPENSES -->
+
+    <div class="recent-box">
+
+        <h3>Recent Expenses</h3>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Payment</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for expense in recent_expenses %}
+
+                <tr>
+                    <td>₹{{ expense.amount }}</td>
+                    <td>{{ expense.category }}</td>
+                    <td>{{ expense.payment_method }}</td>
+                    <td>{{ expense.description }}</td>
+                    <td>{{ expense.date }}</td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="5">No recent expenses found.</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const labels = JSON.parse('{{ labels|escapejs }}');
+const dataValues = JSON.parse('{{ data|escapejs }}');
+
+const pieCtx = document.getElementById('expensePieChart');
+
+new Chart(pieCtx, {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: labels,
+
+        datasets: [{
+
+            data: dataValues,
+
+            backgroundColor: [
+
+                '#38bdf8',
+                '#22c55e',
+                '#f59e0b',
+                '#ef4444',
+                '#8b5cf6',
+                '#06b6d4'
+
+            ],
+
+            borderWidth:2,
+            borderColor:'#1e293b'
+
+        }]
+
+    },
+
+    options: {
+
+        responsive:true,
+        maintainAspectRatio:false,
+
+        plugins:{
+
+    legend:{
+        position:'right',
+
+        labels:{
+            color:'#f8fafc',
+            padding:20,
+            boxWidth:18,
+            boxHeight:18,
+            font:{
+                size:13
+            }
+        }
+    }
+
+}
+
+    }
+
+});
+
+const barCtx = document.getElementById('expenseBarChart');
+
+new Chart(barCtx, {
+
+    type:'bar',
+
+    data:{
+
+        labels: labels,
+
+        datasets:[{
+
+            label:'Expenses',
+
+            data:dataValues,
+
+            backgroundColor:'#38bdf8',
+            borderRadius:10
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+        maintainAspectRatio:false,
+
+        plugins:{
+            legend:{
+                labels:{
+                    color:'#f8fafc'
+                }
+            }
+        },
+
+        scales:{
+
+            x:{
+                ticks:{
+                    color:'#f8fafc'
+                },
+                grid:{
+                    color:'rgba(255,255,255,0.05)'
+                }
+            },
+
+            y:{
+                ticks:{
+                    color:'#f8fafc'
+                },
+                grid:{
+                    color:'rgba(255,255,255,0.05)'
+                }
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

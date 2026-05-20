@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    body{
+        background: linear-gradient(to right, #020024, #090979, #000000);
+        min-height:100vh;
+    }
+
+    .budget-container{
+        width:90%;
+        max-width:1400px;
+        margin:40px auto;
+    }
+
+    .budget-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:40px;
+        flex-wrap:wrap;
+        gap:20px;
+    }
+
+    .header-left h1{
+        color:white;
+        font-size:70px;
+        font-weight:bold;
+        margin-bottom:10px;
+    }
+
+    .header-left p{
+        color:#d1d5db;
+        font-size:22px;
+    }
+
+    .add-budget-btn{
+        background:linear-gradient(to right,#22c55e,#16a34a);
+        color:white;
+        padding:18px 35px;
+        border-radius:15px;
+        text-decoration:none;
+        font-size:22px;
+        font-weight:bold;
+        transition:0.3s;
+        box-shadow:0px 0px 15px rgba(34,197,94,0.4);
+    }
+
+    .add-budget-btn:hover{
+        transform:translateY(-3px);
+        color:white;
+    }
+
+    .budget-cards{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+        gap:25px;
+        margin-bottom:40px;
+    }
+
+    .budget-card{
+        padding:30px;
+        border-radius:25px;
+        color:white;
+        box-shadow:0px 0px 20px rgba(0,0,0,0.4);
+    }
+
+    .card1{
+        background:linear-gradient(to right,#ff416c,#ff4b2b);
+    }
+
+    .card2{
+        background:linear-gradient(to right,#11998e,#38ef7d);
+    }
+
+    .card3{
+        background:linear-gradient(to right,#396afc,#2948ff);
+    }
+
+    .budget-card h4{
+        font-size:24px;
+        margin-bottom:15px;
+    }
+
+    .budget-card h2{
+        font-size:45px;
+        font-weight:bold;
+    }
+
+    .table-box{
+        background:rgba(255,255,255,0.1);
+        backdrop-filter:blur(10px);
+        padding:30px;
+        border-radius:25px;
+        box-shadow:0px 0px 20px rgba(0,0,0,0.4);
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        overflow:hidden;
+        border-radius:15px;
+    }
+
+    thead{
+        background:#111827;
+    }
+
+    thead th{
+        color:#38bdf8;
+        padding:18px;
+        font-size:20px;
+        text-align:left;
+    }
+
+    tbody td{
+        padding:18px;
+        background:white;
+        font-size:18px;
+    }
+
+    tbody tr{
+        border-bottom:1px solid #ddd;
+    }
+
+    .empty-box{
+        text-align:center;
+        padding:50px;
+        color:#d1d5db;
+        font-size:24px;
+    }
+
+    .action-btn{
+        padding:10px 18px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        font-weight:bold;
+        color:white;
+        text-decoration:none;
+        margin-right:8px;
+    }
+
+    .edit-btn{
+        background:#f59e0b;
+    }
+
+    .delete-btn{
+        background:#ef4444;
+    }
+
+</style>
+
+<div class="budget-container">
+
+    <div class="budget-header">
+
+        <div class="header-left">
+            <h1>Your Budgets</h1>
+            <p>
+                Manage spending limits and control your financial goals smartly.
+            </p>
+        </div>
+
+        <a href="{% url 'add_budget' %}" class="add-budget-btn">
+            + Add Budget
+        </a>
+
+    </div>
+
+    <div class="budget-cards">
+
+        <div class="budget-card card1">
+            <h4>Total Budgets</h4>
+            <h2>{{ budgets.count }}</h2>
+        </div>
+
+        <div class="budget-card card2">
+            <h4>Budget Planning</h4>
+            <h2>Smart</h2>
+        </div>
+
+        <div class="budget-card card3">
+            <h4>Financial Control</h4>
+            <h2>Active</h2>
+        </div>
+
+    </div>
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Budget Amount</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for budget in budgets %}
+
+                <tr>
+
+                    <td>{{ budget.category }}</td>
+
+                    <td>₹{{ budget.amount }}</td>
+
+                    <td>{{ budget.created_at }}</td>
+
+                    <td>
+
+                        <a href="#" class="action-btn edit-btn">
+                            Edit
+                        </a>
+
+                        <a href="#" class="action-btn delete-btn">
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="4">
+
+                        <div class="empty-box">
+                            No budgets added yet.
+                        </div>
+
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

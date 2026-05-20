@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    body{
+        background: linear-gradient(to right, #020024, #090979, #000000);
+        min-height:100vh;
+    }
+
+    .budget-main-container{
+        width:90%;
+        max-width:1400px;
+        margin:50px auto;
+        display:flex;
+        gap:60px;
+        align-items:center;
+        justify-content:space-between;
+        flex-wrap:wrap;
+    }
+
+    .left-content{
+        flex:1;
+        min-width:350px;
+        color:white;
+    }
+
+    .left-content h1{
+        font-size:80px;
+        font-weight:bold;
+        line-height:1.1;
+        margin-bottom:25px;
+    }
+
+    .left-content p{
+        font-size:24px;
+        color:#d1d5db;
+        margin-bottom:35px;
+    }
+
+    .feature-boxes{
+        display:flex;
+        gap:20px;
+        flex-wrap:wrap;
+    }
+
+    .feature-card{
+        width:180px;
+        padding:25px;
+        border-radius:20px;
+        background:rgba(255,255,255,0.08);
+        backdrop-filter:blur(10px);
+        box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+        transition:0.3s;
+    }
+
+    .feature-card:hover{
+        transform:translateY(-5px);
+    }
+
+    .feature-card h4{
+        color:#38bdf8;
+        margin-bottom:10px;
+    }
+
+    .feature-card p{
+        color:#d1d5db;
+        font-size:15px;
+        margin:0;
+    }
+
+    .budget-form-box{
+        flex:1;
+        min-width:420px;
+        background:rgba(255,255,255,0.1);
+        padding:50px;
+        border-radius:30px;
+        backdrop-filter:blur(12px);
+        box-shadow:0px 0px 25px rgba(0,0,0,0.4);
+    }
+
+    .budget-form-box h2{
+        text-align:center;
+        color:white;
+        font-size:60px;
+        font-weight:bold;
+        margin-bottom:40px;
+    }
+
+    .form-label{
+        color:white;
+        font-size:22px;
+        margin-bottom:10px;
+        display:block;
+    }
+
+    .custom-input,
+    select{
+        width:100%;
+        padding:16px;
+        border-radius:12px;
+        border:none;
+        outline:none;
+        font-size:18px;
+        margin-bottom:25px;
+        transition:0.3s;
+    }
+
+    .custom-input:focus,
+    select:focus{
+        box-shadow:0px 0px 12px rgba(56,189,248,0.7);
+    }
+
+    .save-btn{
+        width:100%;
+        padding:18px;
+        border:none;
+        border-radius:14px;
+        background:linear-gradient(to right,#22c55e,#16a34a);
+        color:white;
+        font-size:24px;
+        font-weight:bold;
+        transition:0.3s;
+        margin-top:10px;
+    }
+
+    .save-btn:hover{
+        transform:scale(1.02);
+    }
+
+    .top-badge{
+        background:#06b6d4;
+        color:white;
+        display:inline-block;
+        padding:10px 20px;
+        border-radius:30px;
+        font-weight:bold;
+        margin-bottom:25px;
+    }
+
+    @media(max-width:1000px){
+
+        .budget-main-container{
+            flex-direction:column;
+        }
+
+        .left-content h1{
+            font-size:55px;
+        }
+
+    }
+
+</style>
+
+<div class="budget-main-container">
+
+    <div class="left-content">
+
+        <div class="top-badge">
+            Budget Planning
+        </div>
+
+        <h1>
+            Manage <br>
+            Budgets <br>
+            Smartly
+        </h1>
+
+        <p>
+            Create monthly spending limits and track your financial
+            discipline with beautiful smart budgeting tools.
+        </p>
+
+        <div class="feature-boxes">
+
+            <div class="feature-card">
+                <h4>Budget Control</h4>
+                <p>
+                    Set category-wise expense limits easily.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Smart Planning</h4>
+                <p>
+                    Improve savings with better financial planning.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Track Spending</h4>
+                <p>
+                    Analyze your monthly spending patterns.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="budget-form-box">
+
+        <h2>Add Budget</h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label class="form-label">
+                Category
+            </label>
+
+            {{ form.category }}
+
+            <label class="form-label">
+                Budget Amount
+            </label>
+
+            <input
+                type="number"
+                name="amount"
+                class="custom-input"
+                placeholder="Enter Budget Amount"
+                required
+            >
+
+            <button type="submit" class="save-btn">
+                Save Budget
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

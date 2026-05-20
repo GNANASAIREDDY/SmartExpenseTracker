@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    body{
+        background: linear-gradient(to right, #020024, #090979, #000000);
+        min-height:100vh;
+    }
+
+    .login-main-container{
+        width:90%;
+        max-width:1400px;
+        margin:50px auto;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:60px;
+        flex-wrap:wrap;
+    }
+
+    .left-section{
+        flex:1;
+        min-width:350px;
+        color:white;
+    }
+
+    .left-section h1{
+        font-size:85px;
+        font-weight:bold;
+        line-height:1.1;
+        margin-bottom:25px;
+    }
+
+    .left-section h1 span{
+        color:#38bdf8;
+    }
+
+    .left-section p{
+        font-size:24px;
+        color:#d1d5db;
+        margin-bottom:35px;
+    }
+
+    .feature-container{
+        display:flex;
+        gap:20px;
+        flex-wrap:wrap;
+    }
+
+    .feature-card{
+        width:180px;
+        background:rgba(255,255,255,0.08);
+        padding:25px;
+        border-radius:20px;
+        backdrop-filter:blur(10px);
+        box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+        transition:0.3s;
+    }
+
+    .feature-card:hover{
+        transform:translateY(-5px);
+    }
+
+    .feature-card h4{
+        color:#38bdf8;
+        margin-bottom:10px;
+    }
+
+    .feature-card p{
+        font-size:15px;
+        color:#d1d5db;
+        margin:0;
+    }
+
+    .login-form-box{
+        flex:1;
+        min-width:420px;
+        background:rgba(255,255,255,0.08);
+        padding:50px;
+        border-radius:30px;
+        backdrop-filter:blur(12px);
+        box-shadow:0px 0px 25px rgba(0,0,0,0.4);
+    }
+
+    .login-form-box h2{
+        color:white;
+        text-align:center;
+        font-size:65px;
+        font-weight:bold;
+        margin-bottom:40px;
+    }
+
+    .form-label{
+        color:white;
+        font-size:22px;
+        margin-bottom:10px;
+        display:block;
+    }
+
+    .custom-input{
+        width:100%;
+        padding:16px;
+        border:none;
+        outline:none;
+        border-radius:12px;
+        font-size:18px;
+        margin-bottom:25px;
+        transition:0.3s;
+    }
+
+    .custom-input:focus{
+        box-shadow:0px 0px 12px rgba(56,189,248,0.7);
+    }
+
+    .login-btn{
+        width:100%;
+        padding:18px;
+        border:none;
+        border-radius:14px;
+        background:linear-gradient(to right,#22c55e,#16a34a);
+        color:white;
+        font-size:24px;
+        font-weight:bold;
+        transition:0.3s;
+        margin-top:10px;
+    }
+
+    .login-btn:hover{
+        transform:scale(1.02);
+    }
+
+    .register-text{
+        text-align:center;
+        margin-top:25px;
+        color:#d1d5db;
+        font-size:18px;
+    }
+
+    .register-text a{
+        color:#38bdf8;
+        text-decoration:none;
+        font-weight:bold;
+    }
+
+    .top-badge{
+        background:#06b6d4;
+        color:white;
+        display:inline-block;
+        padding:10px 20px;
+        border-radius:30px;
+        font-weight:bold;
+        margin-bottom:25px;
+    }
+
+    .error-message{
+        background:#ef4444;
+        color:white;
+        padding:14px;
+        border-radius:12px;
+        margin-bottom:20px;
+        text-align:center;
+        font-size:17px;
+    }
+
+    @media(max-width:1000px){
+
+        .login-main-container{
+            flex-direction:column;
+        }
+
+        .left-section h1{
+            font-size:55px;
+        }
+
+    }
+
+</style>
+
+<div class="login-main-container">
+
+    <div class="left-section">
+
+        <div class="top-badge">
+            Secure Login
+        </div>
+
+        <h1>
+            Welcome <br>
+            Back To <br>
+            <span>Expense Tracker</span>
+        </h1>
+
+        <p>
+            Manage your expenses, budgets and income securely
+            with beautiful smart financial tracking.
+        </p>
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+                <h4>Track Expenses</h4>
+                <p>Monitor daily spending easily.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Manage Budgets</h4>
+                <p>Stay under spending limits.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Analytics</h4>
+                <p>Visualize your financial growth.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="login-form-box">
+
+        <h2>Login</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label class="form-label">
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                class="custom-input"
+                placeholder="Enter Username"
+                required
+            >
+
+            <label class="form-label">
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                class="custom-input"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit" class="login-btn">
+                Login
+            </button>
+
+        </form>
+
+        <div class="register-text">
+            Don't have an account?
+            <a href="{% url 'register' %}">
+                Register Now
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center">
+    <h1 class="display-4 fw-bold">Smart Expense Tracker</h1>
+
+    <p class="lead mt-4">
+        Track your expenses, manage budgets, and analyze spending smartly.
+    </p>
+
+    {% if user.is_authenticated %}
+
+<a href="/expenses/" class="btn btn-primary btn-lg mt-3">
+    Go To Expenses
+</a>
+
+{% else %}
+
+<a href="/register/" class="btn btn-primary btn-lg mt-3">
+    Get Started
+</a>
+
+{% endif %}
+</div>
+
+{% endblock %}

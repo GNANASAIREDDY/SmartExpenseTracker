@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    body{
+        background: linear-gradient(to right, #020024, #090979, #000000);
+        min-height:100vh;
+    }
+
+    .register-main-container{
+        width:90%;
+        max-width:1400px;
+        margin:50px auto;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:60px;
+        flex-wrap:wrap;
+    }
+
+    .left-section{
+        flex:1;
+        min-width:350px;
+        color:white;
+    }
+
+    .badge-text{
+        display:inline-block;
+        background:#06b6d4;
+        padding:10px 22px;
+        border-radius:30px;
+        font-weight:bold;
+        margin-bottom:25px;
+    }
+
+    .left-section h1{
+        font-size:78px;
+        font-weight:bold;
+        line-height:1.1;
+        margin-bottom:25px;
+    }
+
+    .left-section h1 span{
+        color:#38bdf8;
+    }
+
+    .left-section p{
+        font-size:22px;
+        color:#d1d5db;
+        margin-bottom:35px;
+    }
+
+    .feature-container{
+        display:flex;
+        gap:20px;
+        flex-wrap:wrap;
+    }
+
+    .feature-card{
+        width:180px;
+        background:rgba(255,255,255,0.08);
+        padding:25px;
+        border-radius:20px;
+        backdrop-filter:blur(10px);
+        box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+        transition:0.3s;
+    }
+
+    .feature-card:hover{
+        transform:translateY(-5px);
+    }
+
+    .feature-card h4{
+        color:#38bdf8;
+        margin-bottom:10px;
+    }
+
+    .feature-card p{
+        color:#d1d5db;
+        font-size:15px;
+        margin:0;
+    }
+
+    .register-form-box{
+        flex:1;
+        min-width:420px;
+        background:rgba(255,255,255,0.08);
+        padding:50px;
+        border-radius:30px;
+        backdrop-filter:blur(14px);
+        box-shadow:0px 0px 25px rgba(0,0,0,0.4);
+    }
+
+    .register-form-box h2{
+        color:white;
+        text-align:center;
+        font-size:65px;
+        font-weight:bold;
+        margin-bottom:35px;
+    }
+
+    .form-label{
+        color:white;
+        font-size:20px;
+        margin-bottom:10px;
+        display:block;
+    }
+
+    .custom-input{
+        width:100%;
+        padding:16px;
+        border-radius:12px;
+        border:2px solid transparent;
+        outline:none;
+        font-size:17px;
+        margin-bottom:10px;
+        transition:0.3s;
+    }
+
+    .custom-input:focus{
+        box-shadow:0px 0px 10px rgba(56,189,248,0.7);
+    }
+
+    .info-text{
+        color:#d1d5db;
+        font-size:14px;
+        margin-bottom:20px;
+    }
+
+    .register-btn{
+        width:100%;
+        padding:18px;
+        border:none;
+        border-radius:14px;
+        background:linear-gradient(to right,#22c55e,#16a34a);
+        color:white;
+        font-size:22px;
+        font-weight:bold;
+        transition:0.3s;
+        margin-top:10px;
+    }
+
+    .register-btn:hover{
+        transform:scale(1.02);
+    }
+
+    .login-text{
+        text-align:center;
+        margin-top:25px;
+        color:#d1d5db;
+        font-size:18px;
+    }
+
+    .login-text a{
+        color:#38bdf8;
+        text-decoration:none;
+        font-weight:bold;
+    }
+
+    .password-strength{
+        font-size:15px;
+        margin-bottom:15px;
+        font-weight:bold;
+    }
+
+    .error-border{
+        border:2px solid #ef4444 !important;
+    }
+
+    .success-border{
+        border:2px solid #22c55e !important;
+    }
+
+    @media(max-width:1000px){
+
+        .register-main-container{
+            flex-direction:column;
+        }
+
+        .left-section h1{
+            font-size:55px;
+        }
+
+    }
+
+</style>
+
+<div class="register-main-container">
+
+    <div class="left-section">
+
+        <div class="badge-text">
+            Smart Registration
+        </div>
+
+        <h1>
+            Create Your <br>
+            <span>Expense Tracker</span> <br>
+            Account
+        </h1>
+
+        <p>
+            Join now and manage expenses, budgets,
+            savings and income beautifully with analytics.
+        </p>
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+                <h4>Expense Tracking</h4>
+                <p>Track daily expenses smartly.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Budget Control</h4>
+                <p>Manage spending efficiently.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Financial Analytics</h4>
+                <p>Visualize your growth beautifully.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="register-form-box">
+
+        <h2>Register</h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label class="form-label">
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                class="custom-input"
+                required
+            >
+
+            <div class="info-text">
+                (Required. 150 characters or fewer. Letters, digits and symbols only.)
+            </div>
+
+            <label class="form-label">
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                class="custom-input"
+                required
+            >
+
+            <label class="form-label">
+                Create Password
+            </label>
+
+            <input
+                type="password"
+                name="password1"
+                id="password1"
+                class="custom-input"
+                required
+            >
+
+            <div class="info-text">
+                (Your password must contain at least 8 characters,
+                requires letters, digits and symbols also.)
+            </div>
+
+            <div id="strengthText" class="password-strength"></div>
+
+            <label class="form-label">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                name="password2"
+                id="password2"
+                class="custom-input"
+                required
+            >
+
+            <div id="matchText" class="password-strength"></div>
+
+            <button type="submit" class="register-btn">
+                Register
+            </button>
+
+        </form>
+
+        <div class="login-text">
+            Already have an account?
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    const password1 = document.getElementById("password1");
+    const password2 = document.getElementById("password2");
+
+    const strengthText = document.getElementById("strengthText");
+    const matchText = document.getElementById("matchText");
+
+    password1.addEventListener("input", function(){
+
+        const value = password1.value;
+
+        const hasLetter = /[A-Za-z]/.test(value);
+        const hasNumber = /[0-9]/.test(value);
+        const hasSymbol = /[^A-Za-z0-9]/.test(value);
+
+        if(value.length < 8){
+
+            password1.classList.add("error-border");
+            password1.classList.remove("success-border");
+
+            strengthText.innerHTML = "Password Strength: Weak";
+            strengthText.style.color = "#ef4444";
+
+        }
+
+        else if(hasLetter && hasNumber && hasSymbol){
+
+            password1.classList.remove("error-border");
+            password1.classList.add("success-border");
+
+            strengthText.innerHTML = "Password Strength: Strong";
+            strengthText.style.color = "#22c55e";
+
+        }
+
+        else{
+
+            password1.classList.add("error-border");
+            password1.classList.remove("success-border");
+
+            strengthText.innerHTML = "Password Strength: Weak";
+            strengthText.style.color = "#ef4444";
+
+        }
+
+    });
+
+    password2.addEventListener("input", function(){
+
+        if(password2.value === password1.value && password2.value !== ""){
+
+            password2.classList.remove("error-border");
+            password2.classList.add("success-border");
+
+            matchText.innerHTML = "Passwords Match";
+            matchText.style.color = "#22c55e";
+
+        }
+
+        else{
+
+            password2.classList.add("error-border");
+            password2.classList.remove("success-border");
+
+            matchText.innerHTML = "Passwords Do Not Match";
+            matchText.style.color = "#ef4444";
+
+        }
+
+    });
+
+</script>
+
+{% endblock %}
